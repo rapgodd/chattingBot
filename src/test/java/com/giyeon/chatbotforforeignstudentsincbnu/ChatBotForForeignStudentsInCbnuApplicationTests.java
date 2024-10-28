@@ -1,0 +1,13 @@
+package com.giyeon.chatbotforforeignstudentsincbnu;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ChatBotForForeignStudentsInCbnuApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
