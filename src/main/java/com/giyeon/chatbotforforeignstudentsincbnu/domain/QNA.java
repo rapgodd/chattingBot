@@ -20,6 +20,9 @@ public class QNA {
     private String question;
     private String answer;
     private int phone;
+    private double rate;
+
+    //두개의 필드 추가
     private int total_satisfaction_rating;
     private int rateCount;
 
@@ -31,12 +34,14 @@ public class QNA {
         qna.total_satisfaction_rating = 23;
         qna.rateCount = 5;
         qna.whenqna = LocalDateTime.now();
+        qna.rate = (double) qna.getTotal_satisfaction_rating() / qna.getRateCount();
         return qna;
     }
 
     public QNA updateRate(RateQNADto rateQNADto){
         this.total_satisfaction_rating += rateQNADto.getRate();
         this.rateCount++;
+        this.rate = (double) this.total_satisfaction_rating / this.rateCount;
         return this;
     }
 

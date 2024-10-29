@@ -2,16 +2,13 @@ package com.giyeon.chatbotforforeignstudentsincbnu.controller;
 
 import com.giyeon.chatbotforforeignstudentsincbnu.domain.QNA;
 import com.giyeon.chatbotforforeignstudentsincbnu.dto.QNADto;
-import com.giyeon.chatbotforforeignstudentsincbnu.dto.RateQNADto;
-import com.giyeon.chatbotforforeignstudentsincbnu.dto.SuccessfulResponse;
 import com.giyeon.chatbotforforeignstudentsincbnu.dto.SuccessfulResponseWithQuestionID;
 import com.giyeon.chatbotforforeignstudentsincbnu.service.QNAService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,15 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class QNAController {
     private final QNAService qnaService;
 
+    /**
+     * GPT
+     * 순서(1)
+     */
     @PostMapping("/qna")
     private ResponseEntity<?> saveQuestion(@RequestBody QNADto qnaDto) {
         QNA savedQna = qnaService.saveQuestion(qnaDto);
         return ResponseEntity.ok(new SuccessfulResponseWithQuestionID(savedQna.getId(), 200));
     }
 
-    @PostMapping("/rate")
-    private ResponseEntity<?> rateQuestion(@RequestBody RateQNADto rateQnaDto) {
-        qnaService.updateRate(rateQnaDto);
-        return ResponseEntity.ok(new SuccessfulResponse(200));
+    /**
+     * 처음 질문했을 때
+     * 별점 4.0 이상 질문 다
+     * 가져오기
+     * 순서(2)
+     */
+    @GetMapping("/qna")
+    private List<QNA> getQuestions() {
+        List<QNA> allQuestionAboveFour = qnaService.getAllQuestionAboveFour();
+        return allQuestionAboveFour;
     }
+
 }
