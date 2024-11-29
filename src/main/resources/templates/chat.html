@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>유학생 챗봇</title>
+    <meta charset="UTF-8">
+    <style>
+        /* 간단한 스타일 추가 */
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .chat-box { max-width: 600px; margin: 0 auto; }
+        .message { margin-bottom: 20px; }
+        .question { font-weight: bold; }
+        .answer { margin-left: 20px; }
+    </style>
+</head>
+<body>
+<div class="chat-box">
+    <h1>유학생 챗봇</h1>
+    <form action="#" th:action="@{/chat}" method="post">
+        <label for="message">질문:</label><br>
+        <input type="text" id="message" name="message" style="width: 100%;" required><br><br>
+        <input type="submit" value="전송">
+    </form>
+
+    <div class="message" th:if="${question}">
+        <p class="question">질문: <span th:text="${question}"></span></p>
+        <p class="answer">답변: <span th:text="${answer}"></span></p>
+    </div>
+</div>
+</body>
+</html>

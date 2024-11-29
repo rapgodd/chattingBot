@@ -35,7 +35,7 @@ public class PdfService {
         // PDF 내용을 문장 단위로 나눔
 
         List<String> chunks = new ArrayList<>();
-        int chunkSize = 700;
+        int chunkSize = 1000;
         for (int i = 0; i < content.length(); i += chunkSize) {
             int end = Math.min(content.length(), i + chunkSize);
             chunks.add(content.substring(i, end).replace("\n", ""));
